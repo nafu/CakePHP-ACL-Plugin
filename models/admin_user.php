@@ -47,22 +47,22 @@ class AdminUser extends AclAppModel {
 	);
 
 	function parentNode() {
-    if (!$this->id && empty($this->data)) {
-      return null;
-    }
-    $data = $this->data;
-    if (empty($this->data)) {
-      $data = $this->read();
-    }
-    if (!$data['AdminUser']['admin_group_id']) {
-      return null;
-    } else {
-      return array(
-        'AdminGroup' => array(
-          'id' => $data['AdminUser']['admin_group_id']
-        )
-      );
-    }
-  }
+		if (!$this->id && empty($this->data)) {
+			return null;
+		}
+		$data = $this->data;
+		if (empty($this->data)) {
+			$data = $this->read();
+		}
+		if (!$data['AdminUser']['admin_group_id']) {
+			return null;
+		} else {
+			return array(
+				'AdminGroup' => array(
+					'id' => $data['AdminUser']['admin_group_id']
+				)
+			);
+		}
+	}
 
 }

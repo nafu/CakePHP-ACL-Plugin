@@ -32,8 +32,8 @@ class AdminGroup extends AclAppModel {
 		)
 	);
 
-  function parentNode() {
-    return null;
-  }
+	function parentNode() {
+		return null;
+	}
 
 }
