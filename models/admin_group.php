@@ -18,7 +18,7 @@ class AdminGroup extends AclAppModel {
 
 	var $hasMany = array(
 		'AdminUser' => array(
-			'className' => 'AdminUser',
+			'className' => 'Acl.AdminUser',
 			'foreignKey' => 'admin_group_id',
 			'dependent' => false,
 			'conditions' => '',

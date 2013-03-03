@@ -38,7 +38,7 @@ class AdminUser extends AclAppModel {
 
 	var $belongsTo = array(
 		'AdminGroup' => array(
-			'className' => 'AdminGroup',
+			'className' => 'Acl.AdminGroup',
 			'foreignKey' => 'admin_group_id',
 			'conditions' => '',
 			'fields' => '',
