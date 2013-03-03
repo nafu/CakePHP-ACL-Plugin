@@ -1,10 +1,10 @@
 <?php
 class AdminUsersController extends AclAppController {
   var $name = 'AdminUsers';
-  var $uses = array('AdminUser', 'AdminGroup', 'Aco', 'Aro');
+  var $uses = array('Acl.AdminUser', 'Acl.AdminGroup', 'Aco', 'Aro');
   var $autoRender = true;
   var $layout = 'admins';
-  var $components = array('Acl', 'Auth', 'Session', 'AclReflector', 'AclManager', 'RequestHandler');
+  var $components = array('Acl', 'Auth', 'Session', 'Acl.AclReflector', 'Acl.AclManager', 'RequestHandler');
   var $helpers = array('Js' => array('Jquery'));
 
   /**
