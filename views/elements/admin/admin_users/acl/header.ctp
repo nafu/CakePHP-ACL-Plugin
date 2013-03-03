@@ -1,5 +1,5 @@
 <?php
-echo $this->Html->css('/web/css/admin/admin_users.css');
+echo $this->Html->css('/acl/web/css/admin/admin_users.css');
 ?>
 <div id="plugin_acl">
 
@@ -16,10 +16,10 @@ echo $this->Html->css('/web/css/admin/admin_users.css');
 	    $selected = isset($selected) ? $selected : $this->params['action'];
 
         $links = array();
-        $links[] = $this->Html->link(__d('acl', '権限の変更', true), '/admin/admin_users/aros_index', array('class' => ($selected == 'aros_index' || $selected == 'check' || $selected == 'users' || $selected == 'role_permissions' )? 'selected' : null));
-        $links[] = $this->Html->link(__d('acl', 'アクションのチェック', true), '/admin/admin_users/acos_index', array('class' => ($selected == 'acos_index' || $selected == 'build_acl' || $selected == 'empty_acos' )? 'selected' : null));
+        $links[] = $this->Html->link(__d('acl', '権限の変更', true), '/acl/admin_users/aros_index', array('class' => ($selected == 'aros_index' || $selected == 'check' || $selected == 'users' || $selected == 'role_permissions' )? 'selected' : null));
+        $links[] = $this->Html->link(__d('acl', 'アクションのチェック', true), '/acl/admin_users/acos_index', array('class' => ($selected == 'acos_index' || $selected == 'build_acl' || $selected == 'empty_acos' )? 'selected' : null));
 
-		$links[] = $this->Html->link(__d('acl', 'データベースの初期化', true), '/admin/admin_users/init_db', array('class' => ($selected == 'init_db')? 'selected' : null));
+		$links[] = $this->Html->link(__d('acl', 'データベースの初期化', true), '/acl/admin_users/init_db', array('class' => ($selected == 'init_db')? 'selected' : null));
 
         echo $this->Html->nestedList($links, array('class' => 'acl_links'));
 	}

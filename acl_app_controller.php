@@ -1,7 +1,6 @@
 <?php
 
 class AclAppController extends AppController {
-	var $view = 'Theme';
 	var $layout      = 'admins';
 
 	/**

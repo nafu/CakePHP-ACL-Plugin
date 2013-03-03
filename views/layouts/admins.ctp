@@ -28,7 +28,7 @@
 	<?php
 		echo $this->Html->meta('icon');
 
-		echo $this->Html->script('jquery');
+		echo $this->Html->script('/acl/js/jquery');
 
 		echo $scripts_for_layout;
 	?>

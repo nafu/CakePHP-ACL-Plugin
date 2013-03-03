@@ -1,8 +1,8 @@
-<?php 
+<?php
 echo $this->element('admin/admin_users/acl/header');
 ?>
 
-<?php 
+<?php
 echo $this->element('admin/admin_users/acl/aros/links');
 ?>
 

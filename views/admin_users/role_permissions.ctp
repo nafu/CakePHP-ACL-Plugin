@@ -1,7 +1,7 @@
 <?php
 // レイアウトでjqueryが読み込まれない場合は、以下をコメントアウトする。
 //echo $this->Html->script('http://static.shareee.jp/js/jquery.js');
-echo $this->Html->script('/web/js/admin/admin_users');
+echo $this->Html->script('/acl/web/js/admin/admin_users');
 
 echo $this->element('admin/admin_users/acl/header');
 ?>
@@ -99,7 +99,7 @@ echo $this->element('admin/admin_users/acl/aros/links');
 		    	   /*
 					* The right of the action for the role must still be loaded
     		    	*/
-    		        echo $this->Html->image('/web/img/admin/ajax/waiting16.gif', array('title' => __d('acl', 'loading', true)));
+    		        echo $this->Html->image('/acl/web/img/admin/ajax/waiting16.gif', array('title' => __d('acl', 'loading', true)));
 
     		        if(!in_array($controller_name . '_' . $role[$role_model_name][$role_pk_name], $js_init_done))
     		        {
@@ -110,7 +110,7 @@ echo $this->element('admin/admin_users/acl/aros/links');
 		    		echo '</span>';
 
         	    	echo ' ';
-        	    	echo $this->Html->image('/web/img/admin/ajax/waiting16.gif', array('id' => 'right__' . $role[$role_model_name][$role_pk_name] . '_' . $controller_name . '_' . $ctrl_info['name'] . '_spinner', 'style' => 'display:none;'));
+        	    	echo $this->Html->image('/acl/web/img/admin/ajax/waiting16.gif', array('id' => 'right__' . $role[$role_model_name][$role_pk_name] . '_' . $controller_name . '_' . $ctrl_info['name'] . '_spinner', 'style' => 'display:none;'));
 
         	    	echo '</td>';
 		    	}
@@ -159,7 +159,7 @@ echo $this->element('admin/admin_users/acl/aros/links');
     		    	    /*
     		    	    * The right of the action for the role must still be loaded
     		    	    */
-    		    	    echo $this->Html->image('/web/img/admin/ajax/waiting16.gif', array('title' => __d('acl', 'loading', true)));
+    		    	    echo $this->Html->image('/acl/web/img/admin/ajax/waiting16.gif', array('title' => __d('acl', 'loading', true)));
 
 	    		    	if (!in_array($plugin_name . "_" . $plugin_ctrler_name . '_' . $role[$role_model_name][$role_pk_name], $js_init_done)) {
 	    		        	$js_init_done[] = $plugin_name . "_" . $plugin_ctrler_name . '_' . $role[$role_model_name][$role_pk_name];
@@ -169,7 +169,7 @@ echo $this->element('admin/admin_users/acl/aros/links');
     		    		echo '</span>';
 
             	    	echo ' ';
-            	    	echo $this->Html->image('/web/img/admin/ajax/waiting16.gif', array('id' => 'right_' . $plugin_name . '_' . $role[$role_model_name][$role_pk_name] . '_' . $plugin_ctrler_name . '_' . $method['name'] . '_spinner', 'style' => 'display:none;'));
+            	    	echo $this->Html->image('/acl/web/img/admin/ajax/waiting16.gif', array('id' => 'right_' . $plugin_name . '_' . $role[$role_model_name][$role_pk_name] . '_' . $plugin_ctrler_name . '_' . $method['name'] . '_spinner', 'style' => 'display:none;'));
 
             	    	echo '</td>';
     		    	}
@@ -185,9 +185,9 @@ echo $this->element('admin/admin_users/acl/aros/links');
     ?>
 	</table>
 	<?php
-    echo $this->Html->image('/web/img/admin/acl/tick.png') . ' ' . __d('acl', 'authorized', true);
+    echo $this->Html->image('/acl/web/img/admin/acl/tick.png') . ' ' . __d('acl', 'authorized', true);
     echo '&nbsp;&nbsp;&nbsp;';
-    echo $this->Html->image('/web/img/admin/acl/cross.png') . ' ' . __d('acl', 'blocked', true);
+    echo $this->Html->image('/acl/web/img/admin/acl/cross.png') . ' ' . __d('acl', 'blocked', true);
     ?>
 
 </div>
