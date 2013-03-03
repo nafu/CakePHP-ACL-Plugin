@@ -10,14 +10,14 @@
 			<th><?php echo $this->Paginator->sort('modified');?></th>
 			<th class="actions"><?php __('Actions');?></th>
 	</tr>
-	<?php
-	$i = 0;
-	foreach ($adminUsers as $adminUser):
-		$class = null;
-		if ($i++ % 2 == 0) {
-			$class = ' class="altrow"';
-		}
-	?>
+<?php
+$i = 0;
+foreach ($adminUsers as $adminUser):
+	$class = null;
+if ($i++ % 2 == 0) {
+	$class = ' class="altrow"';
+}
+?>
 	<tr<?php echo $class;?>>
 		<td><?php echo $adminUser['AdminUser']['id']; ?>&nbsp;</td>
 		<td><?php echo $adminUser['AdminUser']['username']; ?>&nbsp;</td>
@@ -38,9 +38,10 @@
 	<p>
 	<?php
 	echo $this->Paginator->counter(array(
-	'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
+		'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
 	));
-	?>	</p>
+	?>
+	</p>
 
 	<div class="paging">
 		<?php echo $this->Paginator->prev('<< ' . __('previous', true), array(), null, array('class'=>'disabled'));?>

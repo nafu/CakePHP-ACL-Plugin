@@ -3,11 +3,11 @@
 	<fieldset>
 		<legend><?php __('Edit Admin User'); ?></legend>
 	<?php
-		echo $this->Form->input('id');
-		echo $this->Form->input('username');
-		echo $this->Form->input('password');
-		echo $this->Form->input('admin_group_id');
-	?>
+echo $this->Form->input('id');
+echo $this->Form->input('username');
+echo $this->Form->input('password');
+echo $this->Form->input('admin_group_id');
+?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit', true));?>
 </div>
