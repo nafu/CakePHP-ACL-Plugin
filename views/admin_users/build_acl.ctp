@@ -34,7 +34,7 @@ else
 	echo '</p>';
 
 	echo '<p>';
-	echo $this->Html->link(__d('acl', 'Build', true), '/admin/admin_users/build_acl/run');
+	echo $this->Html->link(__d('acl', 'Build', true), '/acl/admin_users/build_acl/run');
 	echo '</p>';
 }
 ?>

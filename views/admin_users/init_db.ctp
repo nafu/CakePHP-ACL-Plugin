@@ -17,7 +17,7 @@ else
 	echo '</p>';
 
 	echo '<p>';
-	echo $this->Html->link('init DB', '/admin/admin_users/init_db/run', array('confirm' => __d('init DB', 'Are you sure you want to initialize DB?', true), 'escape' => false));
+	echo $this->Html->link('init DB', '/acl/admin_users/init_db/run', array('confirm' => __d('init DB', 'Are you sure you want to initialize DB?', true), 'escape' => false));
 	echo '</p>';
 }
 ?>
