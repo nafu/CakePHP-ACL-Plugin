@@ -1,5 +1,5 @@
 <?php
-class AdminGroup extends AppModel {
+class AdminGroup extends AclAppModel {
 	var $name = 'AdminGroup';
 	var $actsAs = array('Acl' => 'requester');
 	var $validate = array(
