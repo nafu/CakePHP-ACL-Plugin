@@ -8,8 +8,8 @@ class AclReflectorComponentTestCase extends CakeTestCase {
 	function startTest() {
 		$this->AclReflector =& new AclReflectorComponent();
 		$controller = new FakeAclReflectorController();
-        //$controller->AclReflector = new FakeAclReflectorTest();
-        $this->AclReflector->initialize(&$controller);
+		//$controller->AclReflector = new FakeAclReflectorTest();
+		$this->AclReflector->initialize(&$controller);
 	}
 
 	function endTest() {
@@ -39,6 +39,52 @@ class AclReflectorComponentTestCase extends CakeTestCase {
 
 		$result = $this->AclReflector->getPluginControllerName();
 		$this->assertFalse($result);
+	}
+
+	function testGetControllerClassname() {
+		$result = $this->AclReflector->getControllerClassname('AclController');
+		$expected = 'AclController';
+		$this->assertEqual($result, $expected);
+
+		$result = $this->AclReflector->getControllerClassname('Acl');
+		$expected = 'AclController';
+		$this->assertEqual($result, $expected);
+	}
+
+	function testGetAllPluginsPaths() {
+		$result = $this->AclReflector->getAllPluginsPaths();
+	}
+
+	function testGetAllPluginsNames() {
+		$result = $this->AclReflector->getAllPluginsNames();
+	}
+
+	function testGetAllPluginsControllers() {
+		$result = $this->AclReflector->getAllPluginsControllers();
+	}
+
+	function testgetAllPluginsControllersActions() {
+		$result = $this->AclReflector->getAllPluginsControllersActions();
+	}
+
+	function testGetAllAppControllers() {
+		$result = $this->AclReflector->getAllAppControllers();
+	}
+
+	function testGetAllAppControllersActions() {
+		$result = $this->AclReflector->getAllAppControllersActions();
+	}
+
+	function testGetAllControllers() {
+		$result = $this->AclReflector->getAllControllers();
+	}
+
+	function testGetAllActions() {
+		$result = $this->AclReflector->getAllActions();
+	}
+
+	function testGetControllerActions() {
+		$result = $this->AclReflector->getControllerActions('');
 	}
 
 }

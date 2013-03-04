@@ -1,6 +1,6 @@
 <?php
 class AclManagerComponent extends Object {
-	var $components = array('Acl', 'AclReflector', 'Session');
+	var $components = array('Acl', 'Acl.AclReflector', 'Session');
 
 	/**
 	 * @var AclAppController
@@ -23,7 +23,7 @@ class AclManagerComponent extends Object {
 	 *
 	 * @return boolean true if the file exists or could be created
 	 */
-	private function check_controller_hash_tmp_file() {
+	private function checkControllerHashTmpFile() {
 		if (is_writable(dirname($this->controllers_hash_file))) {
 			$file = new file($this->controllers_hash_file, true);
 			return $file->exists();
@@ -35,7 +35,7 @@ class AclManagerComponent extends Object {
 
 	/****************************************************************************************/
 
-	public function check_user_model_acts_as_acl_requester($model_classname) {
+	public function checkUserModelActsAsAclRequester($model_classname) {
 		//  if(!isset($this->controller->{$model_classname}))
 		//  {
 		//   /*
@@ -48,7 +48,7 @@ class AclManagerComponent extends Object {
 		//   $user_model = $this->controller->{$model_classname};
 		//  }
 
-		$user_model = $this->get_model_instance($model_classname);
+		$user_model = $this->getModelInstance($model_classname);
 
 		$behaviors = $user_model->actsAs;
 		if (!empty($behaviors) && array_key_exists('Acl', $behaviors)) {
@@ -72,8 +72,8 @@ class AclManagerComponent extends Object {
 	 * @param string $field_expression
 	 * @return string The name of the field to use as display name
 	 */
-	public function set_display_name($model_classname, $field_expression) {
-		$model_instance = $this->get_model_instance($model_classname);
+	public function setDisplayName($model_classname, $field_expression) {
+		$model_instance = $this->getModelInstance($model_classname);
 
 		if (array_key_exists($field_expression, $model_instance->_schema) || array_key_exists($field_expression, $model_instance->virtualFields)) {
 			/*
@@ -100,7 +100,7 @@ class AclManagerComponent extends Object {
 	 * @param string $model_classname
 	 * @return Model
 	 */
-	private function get_model_instance($model_classname) {
+	private function getModelInstance($model_classname) {
 		if (!isset($this->controller->{$model_classname})) {
 			/*
        * Do not use $this->controller->loadModel, as calling it from a plugin may prevent correct loading of behaviors
@@ -118,7 +118,7 @@ class AclManagerComponent extends Object {
 	 *
 	 * @return array
 	 */
-	public function get_stored_controllers_hashes() {
+	public function getStoredControllersHashes() {
 		$file         = new file($this->controllers_hash_file);
 		$file_content = $file->read();
 
@@ -136,8 +136,8 @@ class AclManagerComponent extends Object {
 	 *
 	 * @return array
 	 */
-	public function get_current_controllers_hashes() {
-		$controllers = $this->AclReflector->get_all_controllers();
+	public function getCurrentControllersHashes() {
+		$controllers = $this->AclReflector->getAllControllers();
 
 		$current_controller_hashes = array();
 
@@ -159,12 +159,12 @@ class AclManagerComponent extends Object {
 	 * @param boolean $update_hash_file If true, the method update the controller hash file, making the method returning missing ACOs only once
 	 * @return array Array of missing ACO nodes by comparing with each existing plugin, controller and action
 	 */
-	public function get_missing_acos($update_hash_file = true) {
-		if ($this->check_controller_hash_tmp_file()) {
+	public function getMissingAcos($update_hash_file = true) {
+		if ($this->checkControllerHashTmpFile()) {
 			$missing_aco_nodes = array();
 
-			$stored_controller_hashes  = $this->get_stored_controllers_hashes();
-			$current_controller_hashes = $this->get_current_controllers_hashes();
+			$stored_controller_hashes  = $this->getStoredControllersHashes();
+			$current_controller_hashes = $this->getCurrentControllersHashes();
 
 			/*
        * Store current controllers hashes on disk
@@ -183,9 +183,9 @@ class AclManagerComponent extends Object {
 				$aco =& $this->Acl->Aco;
 
 				foreach ($updated_controllers as $controller_name) {
-					$controller_classname = $this->AclReflector->get_controller_classname($controller_name);
+					$controller_classname = $this->AclReflector->getControllerClassname($controller_name);
 
-					$methods = $this->AclReflector->get_controller_actions($controller_classname);
+					$methods = $this->AclReflector->getControllerActions($controller_classname);
 
 					$aco =& $this->Acl->Aco;
 					foreach ($methods as $method) {
@@ -205,12 +205,12 @@ class AclManagerComponent extends Object {
 	 * Store missing ACOs for all actions in the datasource
 	 * If necessary, it creates actions parent nodes (plugin and controller) as well
 	 */
-	public function create_acos() {
+	public function createAcos() {
 		$aco =& $this->Acl->Aco;
 
 		$log = array();
 
-		$controllers = $this->AclReflector->get_all_controllers();
+		$controllers = $this->AclReflector->getAllControllers();
 
 		/******************************************
      * Create 'controllers' node if it does not exist
@@ -317,7 +317,7 @@ class AclManagerComponent extends Object {
 			/******************************************
        * Check controller actions node
        */
-			$actions = $this->AclReflector->get_controller_actions($controller_name);
+			$actions = $this->AclReflector->getControllerActions($controller_name);
 
 			foreach ($actions as $action) {
 				$actionNode = $aco->node('controllers/' . (!empty($plugin_name) ? $plugin_name . '/' : '') . $controller_name . '/' . $action);
@@ -348,7 +348,7 @@ class AclManagerComponent extends Object {
 	 * @param string $aco_path The Aco path to check for
 	 * @param string $permission_type 'deny' or 'allow', 'grant', depending on what permission (grant or deny) is being set
 	 */
-	public function save_permission($aro_nodes, $aco_path, $permission_type) {
+	public function savePermission($aro_nodes, $aco_path, $permission_type) {
 		if (isset($aro_nodes[0])) {
 			$aco_path = 'controllers/' . $aco_path;
 
@@ -366,14 +366,14 @@ class AclManagerComponent extends Object {
 			);
 			$aro_id         = $aro_nodes[0]['Aro']['id'];
 
-			$specific_permission_right  = $this->get_specific_permission_right($aro_nodes[0], $aco_path);
-			$inherited_permission_right = $this->get_first_parent_permission_right($aro_nodes[0], $aco_path);
+			$specific_permission_right  = $this->getSpecificPermissionRight($aro_nodes[0], $aco_path);
+			$inherited_permission_right = $this->getFirstParentPermissionRight($aro_nodes[0], $aco_path);
 
 			if (!isset($inherited_permission_right) && count($aro_nodes) > 1) {
 				/*
          * Get the permission inherited by the parent ARO
          */
-				$specific_parent_aro_permission_right = $this->get_specific_permission_right($aro_nodes[1], $aco_path);
+				$specific_parent_aro_permission_right = $this->getSpecificPermissionRight($aro_nodes[1], $aco_path);
 
 				if (isset($specific_parent_aro_permission_right)) {
 					/*
@@ -381,7 +381,7 @@ class AclManagerComponent extends Object {
            */
 					$inherited_permission_right = $specific_parent_aro_permission_right;
 				} else {
-					$inherited_permission_right = $this->get_first_parent_permission_right($aro_nodes[1], $aco_path);
+					$inherited_permission_right = $this->getFirstParentPermissionRight($aro_nodes[1], $aco_path);
 				}
 			}
 
@@ -468,7 +468,7 @@ class AclManagerComponent extends Object {
 		}
 	}
 
-	private function get_specific_permission_right($aro_node, $aco_path) {
+	private function getSpecificPermissionRight($aro_node, $aco_path) {
 		$pk_name = 'id';
 		if ($aro_node['Aro']['model'] == Configure::read('acl.aro.role.model')) {
 			$pk_name = $this->controller->_get_role_primary_key_name();
@@ -521,7 +521,7 @@ class AclManagerComponent extends Object {
 		return null; // no specific permission found
 	}
 
-	private function get_first_parent_permission_right($aro_node, $aco_path) {
+	private function getFirstParentPermissionRight($aro_node, $aco_path) {
 		$pk_name = 'id';
 		if ($aro_node['Aro']['model'] == Configure::read('acl.aro.role.model')) {
 			$pk_name = $this->controller->_get_role_primary_key_name();

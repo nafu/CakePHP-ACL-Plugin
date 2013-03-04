@@ -72,8 +72,8 @@ class AdminUsersController extends AclAppController {
 		$user_model_name = Configure::read('acl.aro.user.model');
 		$role_model_name = Configure::read('acl.aro.role.model');
 
-		$user_display_field = $this->AclManager->set_display_name($user_model_name, Configure::read('acl.user.display_name'));
-		$role_display_field = $this->AclManager->set_display_name($role_model_name, Configure::read('acl.aro.role.display_field'));
+		$user_display_field = $this->AclManager->setDisplayName($user_model_name, Configure::read('acl.user.display_name'));
+		$role_display_field = $this->AclManager->setDisplayName($role_model_name, Configure::read('acl.aro.role.display_field'));
 
 		$this->set('user_display_field', $user_display_field);
 		$this->set('role_display_field', $role_display_field);
@@ -187,8 +187,8 @@ class AdminUsersController extends AclAppController {
 		$user_model_name = Configure::read('acl.aro.user.model');
 		$role_model_name = Configure::read('acl.aro.role.model');
 
-		$user_display_field = $this->AclManager->set_display_name($user_model_name, Configure::read('acl.user.display_name'));
-		$role_display_field = $this->AclManager->set_display_name($role_model_name, Configure::read('acl.aro.role.display_field'));
+		$user_display_field = $this->AclManager->setDisplayName($user_model_name, Configure::read('acl.user.display_name'));
+		$role_display_field = $this->AclManager->setDisplayName($role_model_name, Configure::read('acl.aro.role.display_field'));
 
 		$this->paginate['order'] = array(
 			$user_display_field => 'asc'
@@ -278,7 +278,7 @@ class AdminUsersController extends AclAppController {
      */
 		$aro_node  = $this->Acl->Aro->node($role_data);
 		if (!empty($aro_node)) {
-			if (!$this->AclManager->save_permission($aro_node, $aco_path, 'grant')) {
+			if (!$this->AclManager->savePermission($aro_node, $aco_path, 'grant')) {
 				$this->set('acl_error', true);
 			}
 		} else {
@@ -305,7 +305,7 @@ class AdminUsersController extends AclAppController {
 		$aco_path  = $this->_get_passed_aco_path();
 		$aro_node  = $this->Acl->Aro->node($role_data);
 		if (!empty($aro_node)) {
-			if (!$this->AclManager->save_permission($aro_node, $aco_path, 'deny')) {
+			if (!$this->AclManager->savePermission($aro_node, $aco_path, 'deny')) {
 				$this->set('acl_error', true);
 			}
 		} else {
@@ -327,7 +327,7 @@ class AdminUsersController extends AclAppController {
 
 	function build_acl($run = null) {
 		if (isset($run)) {
-			$logs = $this->AclManager->create_acos();
+			$logs = $this->AclManager->createAcos();
 
 			$this->set('logs', $logs);
 			$this->set('run', true);
@@ -373,7 +373,7 @@ class AdminUsersController extends AclAppController {
 		if ($controller) {
 			if ($controller === "all") {
 			} else {
-				$controller_actions = $this->AclReflector->get_controller_actions($controller);
+				$controller_actions = $this->AclReflector->getControllerActions($controller);
 				$methods            = array();
 				foreach ($controller_actions as $controller_action) {
 					$methods['app'][$controller][] = array(
@@ -387,7 +387,7 @@ class AdminUsersController extends AclAppController {
 			}
 
 		} else {
-			$controllers = $this->AclReflector->get_all_app_controllers();
+			$controllers = $this->AclReflector->getAllAppControllers();
 			foreach ($controllers as $controller) {
 				$controller_class_name[] = $controller['name'];
 
@@ -396,7 +396,7 @@ class AdminUsersController extends AclAppController {
 			return;
 		}
 
-		$actions = $this->AclReflector->get_all_actions();
+		$actions = $this->AclReflector->getAllActions();
 		$methods = array();
 		foreach ($actions as $full_action) {
 			$arr = String::tokenize($full_action, '/');
@@ -460,7 +460,7 @@ class AdminUsersController extends AclAppController {
 			//?role_id=3&plugin=&controller=AdminUsers
 			$plugin_name        = $this->params['url']['plugin'];
 			$controller_name    = $this->params['url']['controller'];
-			$controller_actions = $this->AclReflector->get_controller_actions($controller_name);
+			$controller_actions = $this->AclReflector->getControllerActions($controller_name);
 
 			$role_controller_permissions = array();
 

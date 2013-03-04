@@ -26,7 +26,7 @@ class AclReflectorComponent extends Object {
 			return false;
 		}
 	}
-	public function get_controller_classname($controller_name) {
+	public function getControllerClassname($controller_name) {
 		if (strrpos($controller_name, 'Controller') !== strlen($controller_name) - strlen('Controller')) {
 			/*
        * If $controller does not already end with 'Controller'
@@ -49,7 +49,7 @@ class AclReflectorComponent extends Object {
 
 	/****************************************************************************************/
 
-	public function get_all_plugins_paths() {
+	public function getAllPluginsPaths() {
 		$plugin_names = array();
 		$plugin_paths = App::path('plugins');
 		$folder =& new Folder();
@@ -64,7 +64,7 @@ class AclReflectorComponent extends Object {
 
 		return $plugin_names;
 	}
-	public function get_all_plugins_names() {
+	public function getAllPluginsNames() {
 		$plugin_names = array();
 
 		$folder =& new Folder();
@@ -83,8 +83,8 @@ class AclReflectorComponent extends Object {
 
 		return $plugin_names;
 	}
-	public function get_all_plugins_controllers($filter_default_controller = true) {
-		$plugin_paths = $this->get_all_plugins_paths();
+	public function getAllPluginsControllers($filter_default_controller = true) {
+		$plugin_paths = $this->getAllPluginsPaths();
 
 		$plugins_controllers = array();
 		$folder =& new Folder();
@@ -124,8 +124,8 @@ class AclReflectorComponent extends Object {
 
 		return $plugins_controllers;
 	}
-	public function get_all_plugins_controllers_actions($filter_default_controller = true) {
-		$plugin_controllers = $this->get_all_plugins_controllers();
+	public function getAllPluginsControllersActions($filter_default_controller = true) {
+		$plugin_controllers = $this->getAllPluginsControllers();
 
 		$plugin_controllers_actions = array();
 
@@ -136,7 +136,7 @@ class AclReflectorComponent extends Object {
 			if (!$filter_default_controller || $plugin_name != $controller_name) {
 				$controller_class_name = $controller_name . 'Controller';
 
-				$ctrl_cleaned_methods = $this->get_controller_actions($controller_class_name);
+				$ctrl_cleaned_methods = $this->getControllerActions($controller_class_name);
 
 				foreach ($ctrl_cleaned_methods as $action) {
 					$plugin_controllers_actions[] = $plugin_name . '/' . $controller_name . '/' . $action;
@@ -149,7 +149,7 @@ class AclReflectorComponent extends Object {
 		return $plugin_controllers_actions;
 	}
 
-	public function get_all_app_controllers() {
+	public function getAllAppControllers() {
 		$controllers = array();
 		$folder =& new Folder();
 
@@ -179,15 +179,15 @@ class AclReflectorComponent extends Object {
 		sort($controllers);
 		return $controllers;
 	}
-	public function get_all_app_controllers_actions() {
-		$controllers = $this->get_all_app_controllers();
+	public function getAllAppControllersActions() {
+		$controllers = $this->getAllAppControllers();
 
 		$controllers_actions = array();
 
 		foreach ($controllers as $controller) {
 			$controller_class_name = $controller['name'] . 'Controller';
 
-			$ctrl_cleaned_methods = $this->get_controller_actions($controller_class_name);
+			$ctrl_cleaned_methods = $this->getControllerActions($controller_class_name);
 
 			foreach ($ctrl_cleaned_methods as $action) {
 				$controllers_actions[] = $controller['name'] . '/' . $action;
@@ -199,15 +199,15 @@ class AclReflectorComponent extends Object {
 		return $controllers_actions;
 	}
 
-	public function get_all_controllers() {
-		$app_controllers    = $this->get_all_app_controllers();
-		$plugin_controllers = $this->get_all_plugins_controllers();
+	public function getAllControllers() {
+		$app_controllers    = $this->getAllAppControllers();
+		$plugin_controllers = $this->getAllPluginsControllers();
 
 		return array_merge($app_controllers, $plugin_controllers);
 	}
-	public function get_all_actions() {
-		$app_controllers_actions     = $this->get_all_app_controllers_actions();
-		$plugins_controllers_actions = $this->get_all_plugins_controllers_actions();
+	public function getAllActions() {
+		$app_controllers_actions     = $this->getAllAppControllersActions();
+		$plugins_controllers_actions = $this->getAllPluginsControllersActions();
 
 		return array_merge($app_controllers_actions, $plugins_controllers_actions);
 	}
@@ -219,12 +219,12 @@ class AclReflectorComponent extends Object {
 	 * @param string $controller_class_name (eg: 'AcosController')
 	 * @param boolean $filter_base_methods
 	 */
-	public function get_controller_actions($controller_classname, $filter_base_methods = true) {
+	public function getControllerActions($controller_classname, $filter_base_methods = true) {
 		//本関数を単独で利用する場合には以下を読み込むこと！！！注意引数を直接読み込むこと
 		// controllers/admins/以下のファイルをインポートする
 		App::import('Controller', Configure::read('acl.controller_base_path') . $controller_classname); //関数直下
 
-		$controller_classname = $this->get_controller_classname($controller_classname);
+		$controller_classname = $this->getControllerClassname($controller_classname);
 
 		$methods = get_class_methods($controller_classname);
 		if (isset($methods) && !empty($methods)) {
