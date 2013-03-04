@@ -6,7 +6,6 @@ class AclReflectorComponent extends Object {
 
 	public function initialize(&$controller) {
 		$this->controller = $controller;
-		//var_dump($controller);
 	}
 
 	/****************************************************************************************/
@@ -204,15 +203,13 @@ class AclReflectorComponent extends Object {
 		$app_controllers    = $this->get_all_app_controllers();
 		$plugin_controllers = $this->get_all_plugins_controllers();
 
-		//return array_merge($app_controllers, $plugin_controllers);
-		return $app_controllers;
+		return array_merge($app_controllers, $plugin_controllers);
 	}
 	public function get_all_actions() {
 		$app_controllers_actions     = $this->get_all_app_controllers_actions();
 		$plugins_controllers_actions = $this->get_all_plugins_controllers_actions();
 
-		//return array_merge($app_controllers_actions, $plugins_controllers_actions);
-		return $app_controllers_actions;
+		return array_merge($app_controllers_actions, $plugins_controllers_actions);
 	}
 
 	/**
@@ -227,17 +224,12 @@ class AclReflectorComponent extends Object {
 		// controllers/admins/以下のファイルをインポートする
 		App::import('Controller', Configure::read('acl.controller_base_path') . $controller_classname); //関数直下
 
-		//var_dump($controller_classname);
 		$controller_classname = $this->get_controller_classname($controller_classname);
-		//var_dump($controller_classname);
-		//App::import('Controller', controller_classname);
 
 		$methods = get_class_methods($controller_classname);
-		//var_dump($methods);
 		if (isset($methods) && !empty($methods)) {
 			if ($filter_base_methods) {
 				$baseMethods = get_class_methods('Controller');
-				//var_dump($baseMethods);
 
 				$ctrl_cleaned_methods = array();
 				foreach ($methods as $method) {
