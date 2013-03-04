@@ -17,7 +17,7 @@ echo __d('acl', 'Clicking the link will destroy all existing actions ACOs and as
 echo '</p>';
 
 echo '<p>';
-echo $this->Html->link($this->Html->image('/web/img/admin/acl/cross.png') . ' ' . __d('acl', 'Clear ACOs', true), '/admin/admin_users/empty_acos/run', array('confirm' => __d('acl', 'Are you sure you want to destroy all existing ACOs ?', true), 'escape' => false));
+echo $this->Html->link($this->Html->image('/acl/web/img/admin/acl/cross.png') . ' ' . __d('acl', 'Clear ACOs', true), '/acl/admin_users/empty_acos/run', array('confirm' => __d('acl', 'Are you sure you want to destroy all existing ACOs ?', true), 'escape' => false));
 echo '</p>';
 ?>
 
