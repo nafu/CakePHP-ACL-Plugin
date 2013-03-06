@@ -26,3 +26,6 @@ Configure :: write('acl.aro.user.primary_key', '');
 // 詳細の権限管理はDB管理のため、ここを頻繁に変更するのは推奨しない。
 Configure :: write('acl.role.access_all_role_ids', array());
 Configure :: write('acl.role.access_all_user_ids', array(1));
+
+// Setup controller path
+Configure :: write('acl.controller_base_path', '');
