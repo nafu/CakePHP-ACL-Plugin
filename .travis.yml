@@ -90,4 +90,8 @@ before_script:
   - cd ./cakephp
 
 script:
+  - php cake/console/cake.php testsuite acl case models/admin_user
+  - php cake/console/cake.php testsuite acl case models/admin_group
+  - php cake/console/cake.php testsuite acl case components/acl_reflector
+  - php cake/console/cake.php testsuite acl case components/acl_manager
   - php cake/console/cake.php testsuite acl all
