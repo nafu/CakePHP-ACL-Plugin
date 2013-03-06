@@ -2,7 +2,7 @@
 App::import('Model', 'Acl.AdminUser');
 
 class AdminUserTestCase extends CakeTestCase {
-	var $fixtures = array('plugin.acl.admin_user', 'plugin.acl.admin_group');
+	var $fixtures = array('plugin.acl.aro', 'plugin.acl.aco', 'plugin.acl.aros_aco', 'plugin.acl.admin_user', 'plugin.acl.admin_group');
 
 	function startTest() {
 		$this->AdminUser =& ClassRegistry::init('AdminUser');

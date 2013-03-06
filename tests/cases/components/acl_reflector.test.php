@@ -5,6 +5,7 @@ App::import('Component', 'Acl.AclReflector');
 class FakeAclReflectorController {}
 
 class AclReflectorComponentTestCase extends CakeTestCase {
+	var $fixtures = array('plugin.acl.aro', 'plugin.acl.aco', 'plugin.acl.aros_aco');
 	function startTest() {
 		$this->AclReflector =& new AclReflectorComponent();
 		$controller = new FakeAclReflectorController();

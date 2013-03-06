@@ -7,6 +7,7 @@ App::import('Model', 'Acl.AdminGroup');
 class FakeAclManagerController {}
 
 class AclManagerComponentTestCase extends CakeTestCase {
+	var $fixtures = array('plugin.acl.aro', 'plugin.acl.aco', 'plugin.acl.aros_aco', 'plugin.acl.admin_user', 'plugin.acl.admin_group');
 	function startTest() {
 		$this->AclManager =& new AclManagerComponent();
 		$controller = new FakeAclManagerController();
